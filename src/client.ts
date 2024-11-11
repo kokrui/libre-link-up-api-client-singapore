@@ -4,7 +4,7 @@ import { ActiveSensor, Connection, GlucoseItem } from './types/connection';
 import { ConnectionsResponse, Datum } from './types/connections';
 import { CountryResponse, AE, RegionalMap } from './types/countries';
 import { GraphData } from './types/graph';
-import { LoginResponse, LoginRedirectResponse } from './types/login';
+import { LoginResponse, LoginRedirectResponse, StepData } from './types/login';
 import { mapData, trendMap } from './utils';
 
 const LIBRE_LINK_SERVER = 'https://api-ap.libreview.io';
@@ -12,6 +12,7 @@ const LIBRE_LINK_SERVER = 'https://api-ap.libreview.io';
 type ClientArgs = {
   username: string;
   password: string;
+  clientVersion?: string;
   connectionIdentifier?: string | ((connections: Datum[]) => string);
 };
 
@@ -35,6 +36,7 @@ const urlMap = {
 export const LibreLinkUpClient = ({
   username,
   password,
+  clientVersion,
   connectionIdentifier,
 }: ClientArgs) => {
   let jwtToken: string | null = null;
@@ -48,7 +50,7 @@ export const LibreLinkUpClient = ({
       connection: 'Keep-Alive',
       'content-type': 'application/json',
       product: 'llu.android',
-      version: '4.7.0',
+      version: clientVersion ?? '4.9.0',
     },
   });
   instance.interceptors.request.use(
@@ -72,7 +74,19 @@ export const LibreLinkUpClient = ({
       password,
     });
 
-    if (loginResponse.data.status === 2) throw new Error('Bad credentials. Please ensure that you have entered the credentials of your LibreLinkUp account (and not of your LibreLink account).');
+    if (loginResponse.data.status === 2) {
+      throw new Error(
+        'Bad credentials. Please ensure that you have entered the credentials of your LibreLinkUp account (and not of your LibreLink account).'
+      );
+    }
+
+    if (loginResponse.data.status === 4) {
+      throw new Error(
+        `Additional action required for your account: ${
+          (loginResponse.data.data as StepData).step?.componentName || 'unknown'
+        }. Please login via app and perform required steps and try again.`
+      );
+    }
 
     if ((loginResponse.data as LoginRedirectResponse).data.redirect) {
       const redirectResponse = loginResponse.data as LoginRedirectResponse;
@@ -152,6 +166,12 @@ export const LibreLinkUpClient = ({
   const readRaw = loginWrapper<ReadRawResponse>(async () => {
     if (!connectionId) {
       const connections = await getConnections();
+
+      if (connections.data.length === 0) {
+        throw new Error(
+          'Your account does not follow any patients. Pleas start following and try again.'
+        );
+      }
 
       connectionId = getConnection(connections.data);
     }

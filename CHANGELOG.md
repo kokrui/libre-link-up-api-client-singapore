@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.7.1](https://github.com/DiaKEM/libre-link-up-api-client/compare/0.7.0...0.7.1) (2024-09-27)
+
+
+### Bug Fixes
+
+* adjust types to handle step data ([#25](https://github.com/DiaKEM/libre-link-up-api-client/issues/25)) ([0fcc2a3](https://github.com/DiaKEM/libre-link-up-api-client/commit/0fcc2a3e4747da236600a452ab5ddeabbef89613))
+* adjust types to handle step data ([#25](https://github.com/DiaKEM/libre-link-up-api-client/issues/25)) ([efb0231](https://github.com/DiaKEM/libre-link-up-api-client/commit/efb0231c26c3c6b27a3f6fd6df6720491246caa6))
+* improve exception messages for required actions ([#25](https://github.com/DiaKEM/libre-link-up-api-client/issues/25)) ([4db1c81](https://github.com/DiaKEM/libre-link-up-api-client/commit/4db1c81e6307a4f0746acfe712fb38ed9d038ef1))
+* improve exception messages for required actions ([#25](https://github.com/DiaKEM/libre-link-up-api-client/issues/25)) ([4576538](https://github.com/DiaKEM/libre-link-up-api-client/commit/45765389c38f5914c86db888d1fc996f255d7b00))
+* improve exception messages for required actions ([#25](https://github.com/DiaKEM/libre-link-up-api-client/issues/25)) ([ee2158a](https://github.com/DiaKEM/libre-link-up-api-client/commit/ee2158af7029e5810155c80a1d1391079d5d7aaf))
+
+# [0.7.0](https://github.com/DiaKEM/libre-link-up-api-client/compare/0.6.1...0.7.0) (2024-09-25)
+
+
+### Bug Fixes
+
+* change bad credentials error code ([1232059](https://github.com/DiaKEM/libre-link-up-api-client/commit/12320599a6927e955870734dcd48230385edc79e))
+
+
+### Features
+
+* error message for bad credentials ([97bfc93](https://github.com/DiaKEM/libre-link-up-api-client/commit/97bfc9304fc46d9855b037283a3cb707070750c2))
+* make client version optional ([0d6f122](https://github.com/DiaKEM/libre-link-up-api-client/commit/0d6f122d3e9a16e8b803c375964f215ee3a351c4))
+
 ## [0.6.1](https://github.com/DiaKEM/libre-link-up-api-client/compare/0.6.0...0.6.1) (2022-11-18)
 
 # [0.6.0](https://github.com/DiaKEM/libre-link-up-api-client/compare/0.5.2...0.6.0) (2022-08-12)

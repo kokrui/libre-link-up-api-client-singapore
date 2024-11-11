@@ -17,7 +17,27 @@ interface LoginRedirectData {
 
 export interface LoginResponse {
   status: number;
-  data: Data;
+  data: Data | StepData;
+}
+
+export interface StepData {
+  step: {
+    type: string;
+    componentName: string;
+    props: {
+      email: string;
+    };
+  };
+  user: {
+    accountType: string;
+    country: string;
+    uiLanguage: string;
+  };
+  authTicket: {
+    token: string;
+    expires: number;
+    duration: number;
+  };
 }
 
 interface Data {
